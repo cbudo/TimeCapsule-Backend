@@ -389,8 +389,15 @@ namespace TimeCapsule_Backend
 		{
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+
+	    public Location(string name, string longitude, string latitude)
+	    {
+	        this.Name = name;
+	        this.Longitude = longitude;
+	        this.Latitude = latitude;
+	    }
+
+	    [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get

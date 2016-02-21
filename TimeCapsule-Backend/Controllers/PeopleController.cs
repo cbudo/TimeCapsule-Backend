@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Http;
 using System.IO;
+using Newtonsoft.Json;
 using TimeCapsule_Backend;
 
 namespace WebRole1.Controllers
@@ -18,10 +19,8 @@ namespace WebRole1.Controllers
             using (TimeCapsuleDBDataContext db = new TimeCapsuleDBDataContext())
             {
                 var peopleList = db.Persons.Where(l => l.Username == name);
-
-                JavaScriptSerializer ser = new JavaScriptSerializer();
-
-                return ser.Serialize(peopleList);
+                
+                return JsonConvert.SerializeObject(peopleList);
             }
 
         }

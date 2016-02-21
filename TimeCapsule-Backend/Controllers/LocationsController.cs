@@ -14,9 +14,19 @@ namespace WebRole1.Controllers
 {
     public class LocationsController : Controller
     {
-        public HttpResponse addLocation()
+        public string addLocation(string name, string longitude, string latitude)
         {
-            return null;
+            using (TimeCapsuleDBDataContext db = new TimeCapsuleDBDataContext())
+            {
+                if ((name==null)||(db.Locations.Count(i => i.Name == name && i.Longitude == longitude && i.Latitude == latitude) != 0))
+                {
+                    Response.StatusCode = 400;
+                    return JsonConvert.SerializeObject(false);
+                }
+                db.Locations.InsertOnSubmit(new Location(name,longitude,latitude));
+                db.SubmitChanges();
+                return JsonConvert.SerializeObject(true);
+            }
         }
         // GET: Location
         public string get(string name)
